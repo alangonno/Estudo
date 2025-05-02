@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td,th,tr {
+            border: 1px solid black;
+            width: 100px;
+        }
+        caption {
+            border: 1px solid black;
+            font-weight: bold;
+        }
+
+        col.cnome {
+            background-color: aqua;
+        }
+        col.cgroup{
+            background-color: red;
+        }
+        col.cprof {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exercicio tabela</h1>
+    <table>
+        <colgroup>
+            <col class="cnome">
+            <col class="cgroup" span="2">
+            <col class="cprof">
+        </colgroup>
+        <caption>Cadastro</caption>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">idade</th>
+            <th scope="col">profissão</th>
+        </tr>
+        <tr>
+            <td>Maria</td>
+            <td>F</td>
+            <td>20</td>
+            <td>Eletricista</td>
+        </tr>
+        <tr>
+            <td>Maria</td>
+            <td>F</td>
+            <td>20</td>
+            <td>Eletricista</td>
+        </tr>
+        <tr>
+            <td>Maria</td>
+            <td>F</td>
+            <td>20</td>
+            <td>Eletricista</td>
+        </tr>
+        <tr class="destaque">
+            <td>Maria</td>
+            <td>F</td>
+            <td>20</td>
+            <td>Eletricista</td>
+        </tr>
+        <tr>
+            <td>Maria</td>
+            <td>F</td>
+            <td>20</td>
+            <td>Eletricista</td>
+        </tr>
+    </table>
+</body>
+</html>
