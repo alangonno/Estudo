@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="cadastro.java" method="get">
+        <label for="est">estado</label>
+        <select name="estado" id="est">
+
+            <optgroup label="REgiao cu">
+                <option value="MG">Minas</option>
+                <option value="SP">Sampa</option>
+                <option value="RJ">Rio</option>
+            </optgroup>
+
+            <optgroup label="Mora em">
+                <option value="PE">Pernambuco</option>
+                <option value="TI">Tilambucanse</option>
+            </optgroup>
+        </select>
+
+        <div>
+            <label for="prof">Profissão:</label>
+            <input type="text" name="prof" id="prof" list="lstprof">
+            <datalist id="lstprof">
+                <option value="Mec">Mecanico</option>
+                <option value="Bom">Bombeiro</option>
+                <option value="Med">Medico</option>
+            </datalist>
+        </div>
+
+        <div>
+            <label for="msg">Mensagem:</label>
+            <textarea name="msg" id="msg"cols="30" rows="30" placeholder="Sua mensagem"></textarea>
+        </div>
+    </form>
+</body>
+</html>
