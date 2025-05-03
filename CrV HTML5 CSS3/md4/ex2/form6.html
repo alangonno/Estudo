@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>FORM 5</h1>
+    <form action="cadastro.java" method="GET">
+        <fieldset>
+            <legend>Sexo</legend>
+            <input type="radio" value="M" name="sex" id="mas" checked><label for="mas">Masculino</label>
+            <input type="radio" value="F" name="sex" id="fem"><label for="fem">Feminino</label>
+        </fieldset>
+        <fieldset>
+            <legend>Esportes</legend>
+            <input type="checkbox" name="esBas" id="espBas"><label for="espBas">Basquete</label> <br>
+            <input type="checkbox" name="esVol" id="espVols"><label for="espVols">Volei</label> <br>
+            <input type="checkbox" name="esFut" id="espFut"><label for="espFut">Futebol</label> <br>
+            <input type="checkbox" name="esHan" id="espHan"><label for="espHan">Handebol</label> <br>
+        </fieldset>
+        <div>
+            <label for="usuario">Usuario</label>
+            <input type="text" name="usuario" id="usuario">
+        </div>
+            <input type="submit" value="enviar">
+    </form>
+</body>
+</html>
