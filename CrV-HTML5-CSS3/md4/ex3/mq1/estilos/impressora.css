@@ -14,3 +14,7 @@ html {
 menu {
     display: none;
 }
+
+article::after {
+    content: "artigo do site do gonnon";
+}
