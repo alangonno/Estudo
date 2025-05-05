@@ -12,7 +12,8 @@ public class DataTeste {
         natal.mes = 12;
         natal.ano = 0;
 
-        System.out.println(aniversario.dia);
-        System.out.println(natal.dia);
+        String natalf = (natal.obterData());
+        aniversario.imprimirData();
+        natal.imprimirData();
     }
 }

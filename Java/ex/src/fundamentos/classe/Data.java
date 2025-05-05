@@ -5,4 +5,10 @@ public class Data {
     int mes;
     int ano;
     
+    String obterData (){
+        return String.format("%d/%d/%d\n", dia, mes, ano);
+    }
+    void imprimirData() {
+        System.out.println(obterData());
+    }
 }
