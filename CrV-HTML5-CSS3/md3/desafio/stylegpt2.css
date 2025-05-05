@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap');
+
+:root {
+    --cor-fundo: #f9f9f9;
+    --cor-header-footer: #2c2c2c;
+    --cor-texto-principal: #1a1a1a;
+    --cor-link: #007bff;
+    --cor-link-hover: #0056b3;
+    --cor-card: #ffffff;
+    --fonte-principal: 'Slabo 27px', serif;
+    --sombra-suave: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+    font-family: var(--fonte-principal);
+    line-height: 1.6;
+    text-align: center;
+}
+
+header {
+    background-color: var(--cor-header-footer);
+    color: white;
+    padding: 40px 20px;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+header p {
+    font-size: 1.3rem;
+}
+
+header a {
+    color: var(--cor-link);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header a:hover,
+header a:focus {
+    color: var(--cor-link-hover);
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+main section {
+    background-color: var(--cor-card);
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--sombra-suave);
+    text-align: left;
+}
+
+main section.padrao p {
+    padding: 15px 0;
+    text-indent: 20px;
+}
+
+main section.img {
+    color: white;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    box-shadow: inset 6px 6px 13px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+}
+
+main section.img p {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 25px;
+    border-radius: 10px;
+    text-indent: 20px;
+}
+
+main section#img1 {
+    background-image: url('https://images.unsplash.com/photo-1516387938698-7a017198b77e?auto=format&fit=crop&w=870&q=80');
+}
+
+main section#img2 {
+    background-image: url('https://images.unsplash.com/photo-1604199858585-1c8ca62c9a8c?auto=format&fit=crop&w=870&q=80');
+}
+
+footer {
+    background-color: var(--cor-header-footer);
+    color: white;
+    padding: 25px;
+    font-size: 0.9rem;
+}
+
+footer p {
+    margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2rem;
+    }
+
+    header p,
+    main,
+    main section,
+    footer {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    main section.img p {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,131 @@
+/* Reset básico aprimorado */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Variáveis de cores para facilitar a manutenção */
+:root {
+  --cor-primaria: #333;
+  --cor-secundaria: #a44;
+  --cor-destaque: #ffdf5e;
+  --cor-fundo-claro: #f4f4f4;
+  --cor-texto-claro: #fff;
+  --cor-texto-escuro: #222;
+  --borda-tracejada: #ccc;
+}
+
+/* Corpo com fundo mais suave e tipografia moderna */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte mais moderna e legível */
+  color: var(--cor-texto-escuro);
+  line-height: 1.6; /* Melhora a legibilidade do texto */
+  background-color: var(--cor-fundo-claro); /* Fundo mais claro como padrão */
+  transition: background-color 0.3s ease; /* Transição suave para futuras alterações de tema */
+}
+
+/* Cabeçalho com visual mais clean e elegante */
+header {
+  background-color: rgba(0, 0, 0, 0.9); /* Preto um pouco mais opaco */
+  color: var(--cor-texto-claro);
+  text-align: center;
+  padding: 2.5rem 1rem; /* Aumentei um pouco o padding */
+  border-bottom: 3px solid var(--borda-tracejada); /* Borda mais sutil */
+}
+
+header h1 {
+  font-family: 'Montserrat', sans-serif; /* Fonte moderna e impactante */
+  font-size: 2.8rem; /* Aumentei um pouco a fonte */
+  margin-bottom: 0.75rem;
+  font-weight: 700; /* Deixa o título mais forte */
+  letter-spacing: -0.05rem; /* Pequeno ajuste no espaçamento */
+}
+
+header a {
+  color: var(--cor-destaque);
+  text-decoration: none;
+  transition: color 0.3s ease; /* Transição suave para o hover */
+}
+
+header a:hover {
+  text-decoration: none; /* Removi o sublinhado padrão no hover */
+  color: darken(var(--cor-destaque), 10%); /* Escurece um pouco no hover */
+}
+
+/* Conteúdo principal com foco e melhor contraste */
+main {
+  max-width: 900px; /* Aumentei um pouco a largura máxima */
+  margin: 2rem auto; /* Adicionei margem superior para mais espaço */
+  padding: 2.5rem 1.5rem; /* Aumentei o padding interno */
+  background-color: white; /* Fundo branco para o conteúdo principal */
+  border-radius: 8px; /* Bordas um pouco mais arredondadas */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra mais sutil e moderna */
+}
+
+section.padrao,
+section.img {
+  margin-bottom: 2.5rem; /* Aumentei a margem inferior */
+  padding: 1.5rem;
+  border-left: 5px solid var(--cor-secundaria); /* Cor da borda mais viva */
+  background-color: rgba(var(--cor-secundaria), 0.1); /* Fundo suave da cor da borda */
+  color: var(--cor-primaria); /* Texto principal mais escuro para contraste */
+  font-style: normal; /* Removi o itálico como padrão */
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.08); /* Sombra mais suave */
+  border-radius: 4px; /* Pequeno arredondamento */
+}
+
+section.img {
+  background-image: url("background001.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: var(--cor-texto-claro);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Sombra no texto para melhor leitura sobre a imagem */
+  padding: 2rem; /* Aumentei o padding para dar mais espaço ao texto */
+}
+
+section.img p {
+  background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente para o texto */
+  padding: 0.75rem;
+  border-radius: 4px;
+  display: inline-block; /* Para ajustar ao tamanho do texto */
+}
+
+/* Rodapé mais discreto e elegante */
+footer {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: var(--cor-texto-claro);
+  padding: 1.5rem; /* Aumentei um pouco o padding */
+  font-size: 0.85rem; /* Diminui um pouco a fonte */
+  border-top: 3px solid var(--borda-tracejada); /* Borda mais sutil */
+}
+
+/* Responsivo aprimorado */
+@media (max-width: 768px) { /* Breakpoint um pouco maior para tablets */
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  main {
+    padding: 1.5rem;
+  }
+
+  section.padrao,
+  section.img {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) { /* Breakpoint para dispositivos menores */
+  header {
+    padding: 1.5rem 0.5rem;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+}
