@@ -1,3 +1,14 @@
 @charset "UTF-8";
 
 /* geral */
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+ body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
