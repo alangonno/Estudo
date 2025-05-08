@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+
+@media  screen and (min-width: 768px) and (max-width: 992px) {
+    header > i#iconeMenu {
+        display: none;
+    }
+
+    menu#itens{
+        display: block;
+    }
+
+    menu > ul > li {
+        display: inline-block;
+    }
+
+    main {
+        width: 768px;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    header > i#iconeMenu {
+        display: none;
+    }
+    
+    menu#itens{
+        display: block;
+    }
+
+    main {
+        width: 70vw;
+    }
+
+    
+
+    menu > ul > li {
+        display: inline-block;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    header > i#iconeMenu {
+        display: none;
+    }
+
+    menu#itens{
+        display: block;
+    }
+
+    menu > ul > li {
+        display: inline-block;
+    }
+
+    main {
+        width: 45vw;
+    }
+}   
