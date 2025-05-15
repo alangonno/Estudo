@@ -14,6 +14,8 @@ html, body, main  {
 
 main {
     position: relative;
+    height: 100vh;
+    width: 100vw;
 }
 
 section#login {
@@ -30,11 +32,15 @@ section#login {
 }
 
 div#img {
+    display: block;
     background-image: url(pexels-david-bartus-43782-963278.jpg);
     height: 200px;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center right;
+    background-position: right right;
+    float: right;
+    width: 50%;
+    height: 100%;
     
 }
 
@@ -43,7 +49,9 @@ label,input {
 }
 
 div#formulario {
-
+    
+    display: block;
+    float: left;
 }
 
 /* 11:11 versão mobile first*/
