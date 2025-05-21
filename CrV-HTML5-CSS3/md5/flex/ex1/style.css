@@ -1,0 +1,17 @@
+div.container {
+    height: 300px;
+    width: 300px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    background-color: blue;
+    align-items: center;
+
+}
+
+div.item {
+    width: 50px;
+    text-align: center;
+    background-color: aqua;
+
+}
