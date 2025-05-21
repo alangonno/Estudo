@@ -1,4 +1,8 @@
-package POO.Heranca.Desafio;
+package POO.Heranca.Teste;
+
+import POO.Heranca.Desafio.Carro;
+import POO.Heranca.Desafio.Civic;
+import POO.Heranca.Desafio.Ferrari;
 
 public class Corrida {
 

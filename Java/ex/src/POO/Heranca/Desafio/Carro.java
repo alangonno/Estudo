@@ -2,14 +2,25 @@ package POO.Heranca.Desafio;
 
 public class Carro {
 
-    int velAtual;
+    public int velAtual;
+    private final int VEL_MAX;
 
-    boolean acel() {
+    protected Carro(int velMax) {
+        VEL_MAX = velMax;
+    }
+
+    public boolean acel() {
+        if(velAtual + 5 > VEL_MAX) {
+            return false;
+        }
         velAtual += 5;
         return true;
     }
 
-    boolean freiar() {
+    public boolean freiar() {
+        if (velAtual - 5 < 0) {
+            return false;
+        }
         velAtual -= 5;
         return true;
     }

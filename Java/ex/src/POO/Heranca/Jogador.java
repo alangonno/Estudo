@@ -1,11 +1,17 @@
 package POO.Heranca;
 
 public class Jogador {
-    int vida = 100;
-    int x = 0;
-    int y = 0;
+    public int vida = 100;
+    public int x = 0;
+    public int y = 0;
 
-    boolean andar(Direcao direcao) {
+
+    Jogador(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public boolean andar(Direcao direcao) {
         switch (direcao) {
             case NORTE: y++; break;
             case SUL: y-- ; break;
@@ -16,7 +22,7 @@ public class Jogador {
         return true;
     }
 
-    boolean atacar(Jogador inimigo) {
+    public boolean atacar(Jogador inimigo) {
 
         int difX = Math.abs(this.x - inimigo.x);
         int difY = Math.abs(this.y - inimigo.y);
