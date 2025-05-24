@@ -1,6 +1,6 @@
 package POO.Heranca.Desafio;
 
-public class Ferrari extends Carro {
+public class Ferrari extends Carro implements Esportivo {
 
 
     public Ferrari() {
@@ -13,5 +13,21 @@ public class Ferrari extends Carro {
             super.acel();
         }
         return true;
+    }
+
+    @Override
+    public void ligarTurbo() {
+        for (int a = 0; a <= 5; a++) {
+            super.acel();
+        }
+
+    }
+
+    @Override
+    public void desligarTurbo() {
+        for (int a = 0; a <= 5; a++) {
+            super.freiar();
+        }
+
     }
 }
