@@ -9,4 +9,7 @@ public class ForEach {
         System.out.println(nota);
        }
     }
+
+    public static void Imprimir(String s) {
+    }
 }
