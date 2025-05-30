@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+header, footer, section {
+    padding: 20px;
+}
+section {
+    background-color: grey;
+    display: flex;
+    
+    /* deixar os dois ocupando o mesmo espaço texto e midia*/
+}
+
+@media screen and (max-width: 700px) {
+    
+    section#mt {
+        flex-flow: column-reverse;
+    }
+}
