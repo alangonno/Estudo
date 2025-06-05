@@ -1,4 +1,4 @@
-package Lambdas;
+package lambdas;
 
 public class CalcTeste2 {
 

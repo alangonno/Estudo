@@ -1,7 +1,4 @@
-package Lambdas;
-
-import fundamentos.For;
-import fundamentos.array.ForEach;
+package lambdas;
 
 import java.util.Arrays;
 import java.util.List;

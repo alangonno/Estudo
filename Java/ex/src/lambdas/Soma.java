@@ -1,4 +1,4 @@
-package Lambdas;
+package lambdas;
 
 public class Soma implements Calculo{
 
