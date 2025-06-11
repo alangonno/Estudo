@@ -1,4 +1,4 @@
-package fundamentos;
+package Plataformas.Udemy.fundamentos;
 
 public class area {
     public static void main(String[] args) {
