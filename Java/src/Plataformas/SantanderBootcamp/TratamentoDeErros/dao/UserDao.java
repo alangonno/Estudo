@@ -1,7 +1,8 @@
-package Plataformas.SantanderBootcamp.ContaBanco.TratamentoDeErros.dao;
+package Plataformas.SantanderBootcamp.TratamentoDeErros.dao;
 
-import Plataformas.SantanderBootcamp.ContaBanco.TratamentoDeErros.exceptions.UserNotFoundException;
-import Plataformas.SantanderBootcamp.ContaBanco.TratamentoDeErros.model.UserModel;
+import Plataformas.SantanderBootcamp.TratamentoDeErros.exceptions.EmptyStorageException;
+import Plataformas.SantanderBootcamp.TratamentoDeErros.exceptions.UserNotFoundException;
+import Plataformas.SantanderBootcamp.TratamentoDeErros.model.UserModel;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,7 @@ public class UserDao {
     }
 
     public UserModel findById(final long id) {
+        verifyStorage();
         String message = String.format("Não existe usuario com o Id %s cadastrado", id);
         return models.stream()
                 .filter(u ->u.getId() == id)
@@ -43,7 +45,17 @@ public class UserDao {
     }
 
     public List<UserModel> findAll() {
+
+        try {
+            verifyStorage();
+        }catch (EmptyStorageException error) {
+            System.out.println(error.getMessage());
+        }
         return models;
+    }
+
+    private void verifyStorage() {
+        if (models.isEmpty()) throw new EmptyStorageException("Armazenamento está vazio");
     }
 
 }

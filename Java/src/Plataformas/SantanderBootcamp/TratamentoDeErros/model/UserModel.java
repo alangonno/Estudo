@@ -1,6 +1,5 @@
-package Plataformas.SantanderBootcamp.ContaBanco.TratamentoDeErros.model;
+package Plataformas.SantanderBootcamp.TratamentoDeErros.model;
 
-import java.time.OffsetDateTime;
 import java.util.Objects;
 
 public class UserModel {

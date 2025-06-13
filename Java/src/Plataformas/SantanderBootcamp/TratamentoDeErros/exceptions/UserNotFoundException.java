@@ -1,4 +1,4 @@
-package Plataformas.SantanderBootcamp.ContaBanco.TratamentoDeErros.exceptions;
+package Plataformas.SantanderBootcamp.TratamentoDeErros.exceptions;
 
 public class UserNotFoundException extends RuntimeException{
 
