@@ -9,6 +9,7 @@ public class Contador {
 
         try (Scanner entrada = new Scanner(System.in)) {
             System.out.println("Digite o primeiro parâmetro");
+
             int n1 = entrada.nextInt();
             entrada.nextLine();
             System.out.println("Digite o segundo parâmetro");
@@ -22,7 +23,6 @@ public class Contador {
             }catch (ParametroInvalidosException error) {
                 System.out.println(error.getMessage());
             }
-
 
         }
     }
