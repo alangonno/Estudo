@@ -1,2 +1,2 @@
 # Estudo
-Exercicios dos cursos sendo feitos
+Exercicios cursos de Java, HTML e CSS

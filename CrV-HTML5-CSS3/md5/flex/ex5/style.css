@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+* {
+    margin: 0px;
+    padding: 0px;
+    text-align: justify;
+}
+
+p {
+    margin-right: 10px;
+}
+
+header, footer, section {
+    padding: 20px;
+}
+
+article {
+    display: flex;
+    flex-flow: column nowrap;
+}
+section {
+    flex-flow: row nowrap;
+    background-color: grey;
+    display: flex;
+    
+    /* deixar os dois ocupando o mesmo espaço texto e midia*/
+}
+
+section > div.text {
+
+    flex:1 1 500px
+
+}
+
+iframe {
+    flex:1 0 560px;
+    display: block;
+    margin: auto
+    }
+
+img {
+    flex:1 0 560px;
+    margin: auto;
+    display: block;
+}
+
+
+    
+
+    section#mt {
+        flex-flow: row wrap-reverse;
+        justify-content: space-between;
+    }
+
+    section#tm {
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+
