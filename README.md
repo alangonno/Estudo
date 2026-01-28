@@ -1,6 +1,6 @@
 # Estudo
 
-Este repositório contém uma coleção de exercícios e projetos desenvolvidos como parte de estudos em diversas tecnologias.
+Este repositório contém uma coleção de exercícios e projetos desenvolvidos como parte de estudos em diversas tecnologias. É importante notar que este repositório foca principalmente nas etapas iniciais da minha jornada de aprendizagem. Embora eu continue a estudar e aplicar outros conceitos e tecnologias mais avançadas (como Spring, PostgreSQL, entre outros) em projetos, muitos deles não estão presentes neste repositório. Minha aprendizagem se estende para além do que está documentado aqui.
 
 ## Conteúdo do Repositório:
 
@@ -32,4 +32,4 @@ Um projeto inicial de React para estudo e prática do framework:
 
 Este repositório serve como um portfólio de estudos e uma referência rápida para os conceitos aprendidos e aplicados.
 
-É importante notar que este repositório foca principalmente nas etapas iniciais da minha jornada de aprendizagem. Embora eu continue a estudar e aplicar outros conceitos e tecnologias mais avançadas (como Spring, PostgreSQL, entre outros) em projetos, muitos deles não estão presentes neste repositório. Minha aprendizagem se estende para além do que está documentado aqui.
+
