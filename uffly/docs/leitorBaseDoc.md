@@ -23,10 +23,8 @@ Script responsável pelo **Passo B/C** da Missão 1. Ele varre a câmera em temp
 
 ## 2. Constantes Configuráveis
 
-- **`AREA_MIN` / `AREA_MAX`**: Limites de área em pixels. Contornos menores que 2000px são ruído; maiores que 200.000px são a borda da folha inteira.
-- **`SOLIDITY_MIN`**: Limiar de solidez. Formas regulares (triângulo, hexágono) ficam acima de 0.70. Sombras e texturas ficam abaixo.
-- **`ASPECT_RATIO_MIN` / `ASPECT_RATIO_MAX`**: Razão largura/altura. Elimina linhas longas e bordas esticadas que passariam os filtros de área.
-- **`SCORE_MINIMO_TEMPLATE`**: Score mínimo do template matching para aceitar leitura (0.45).
+As métricas físicas de Área, Solidity, Aspect Ratio e Rigor Matemático (`SCORE_MINIMO_TEMPLATE`) que regulam este script foram migradas e centralizadas. 
+👉 Consulte o [Painel de Controle Doc](configDoc.md) para ver como alterar e calibrar esses valores no dia da competição.
 
 ---
 
@@ -77,8 +75,9 @@ Script responsável pelo **Passo B/C** da Missão 1. Ele varre a câmera em temp
 
 ### Orquestração e Estabilidade
 
-#### `EstabilizadorLeitura(frames_necessarios)`
-- **O que faz:** Impede oscilações de detecção. Confirma a leitura do dígito e forma apenas após 15 frames consecutivos idênticos. **Trava de Segurança:** Se o classificador retornar que não viu "Nenhuma" base no frame, a contagem e a memória do estabilizador são zeradas imediatamente, garantindo que o drone entenda que perdeu o alvo.
+#### EstabilizadorTemporal
+- **O que faz:** Impede oscilações de detecção avaliando o tempo de tela baseado no Relógio do Sistema (Segundos contínuos). Substituiu a ineficiente contagem de frames.
+👉 Motor algorítmico detalhado no [Visão Utils Doc](visaoUtilsDoc.md).
 
 #### `observar_frame_bases(frame, templates, estabilizador)`
 - **O que faz:** Pipeline completo: Segmenta → Contornos → Filtra → Classifica forma → Template Matching → HUD visual. **Trava de Alvo:** O pipeline varre do maior para o menor contorno e envia apenas o **MAIOR alvo válido** da cena para o `EstabilizadorLeitura`, ignorando bases menores ao fundo para não reiniciar a contagem.
@@ -88,9 +87,9 @@ Script responsável pelo **Passo B/C** da Missão 1. Ele varre a câmera em temp
 
 ---
 
-## 4. Código Reaproveitado (Imports)
+## 4. Código Reaproveitado Modular (`visao_utils`)
 
-| Função | Origem | Motivo |
-|---|---|---|
-| `escrever_texto_pillow()` | `identificar_distancia.py` | Texto com acentos na tela |
-| `classificar_geometria_gabarito()` | `leitor_aruco_isolado.py` | Classificar forma sem duplicar lógica |
+As funções matemáticas complexas que engordavam este script foram abstraídas para a biblioteca utilitária do drone.
+👉 Consulte o [Visão Utils Doc](visaoUtilsDoc.md) para ler sobre:
+- `classificar_geometria_gabarito()` (Matemática de extração de vales e vértices)
+- `escrever_texto_pillow()` (UI/Estética de fontes na tela da câmera)

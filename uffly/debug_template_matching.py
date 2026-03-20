@@ -20,17 +20,15 @@ import numpy as np
 import time
 import os
 
-from identificar_distancia import escrever_texto_pillow
+from visao_utils.hud import escrever_texto_pillow
 
-# Importa as configurações exatas que estão rodando no script principal
 from leitor_bases_isolado import (
     segmentar_frame, 
     filtrar_contornos_por_propriedades, 
     extrair_roi_interna, 
-    carregar_templates, 
-    ESCALAS_TEMPLATE,
-    SCORE_MINIMO_TEMPLATE
+    carregar_templates
 )
+from config import BASES_ESCALAS_TEMPLATE, BASES_SCORE_MINIMO_TEMPLATE
 
 def gerar_imagem_templates(templates):
     """Junta as 3 imagens dos templates lado a lado para exibição"""
@@ -54,7 +52,7 @@ def registrar_dump_matematico(roi_gray, templates):
 
     melhor_global = {"digito": None, "score": 0.0, "escala": 0.0}
 
-    for escala in ESCALAS_TEMPLATE:
+    for escala in BASES_ESCALAS_TEMPLATE:
         print(f"\n[Escala {escala:.2f}] Tamanho testado:")
         
         for digito, tmpl in templates.items():
@@ -72,16 +70,16 @@ def registrar_dump_matematico(roi_gray, templates):
             resultado = cv2.matchTemplate(roi_gray, tmpl_resized, cv2.TM_CCOEFF_NORMED)
             _, max_val, _, _ = cv2.minMaxLoc(resultado)
             
-            print(f"  - Digito '{digito}': Score {max_val:.4f} (Mínimo: {SCORE_MINIMO_TEMPLATE:.2f})")
+            print(f"  - Digito '{digito}': Score {max_val:.4f} (Mínimo: {BASES_SCORE_MINIMO_TEMPLATE:.2f})")
             
             if max_val > melhor_global["score"]:
                 melhor_global = {"digito": digito, "score": max_val, "escala": escala}
 
     print("-" * 50)
-    if melhor_global["score"] >= SCORE_MINIMO_TEMPLATE:
+    if melhor_global["score"] >= BASES_SCORE_MINIMO_TEMPLATE:
         print(f"VENCEDOR: '{melhor_global['digito']}' | Score: {melhor_global['score']:.4f} (Escala: {melhor_global['escala']:.2f})")
     else:
-        print(f"NENHUM VENCEU. O melhor foi '{melhor_global['digito']}' com {melhor_global['score']:.4f}, mas não atingiu os {SCORE_MINIMO_TEMPLATE:.2f} exigidos.")
+        print(f"NENHUM VENCEU. O melhor foi '{melhor_global['digito']}' com {melhor_global['score']:.4f}, mas não atingiu os {BASES_SCORE_MINIMO_TEMPLATE:.2f} exigidos.")
     print("="*50 + "\n")
 
 def loop_debug():

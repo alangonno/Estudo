@@ -65,27 +65,11 @@ Termos técnicos que aparecem ao longo do código e desta documentação:
 
 > Talvez no futuro seja melhor analisar a imagem primeiro e depois o ArUco caso existam ArUcos falsos na competição para enganar. --Alan
 
-### `classificar_geometria_gabarito(roi_bgr)`
-Recebe a ROI e passa por um pipeline de etapas até saber qual forma geométrica está desenhada:
+### Dependências Modulares da Visão (`visao_utils`)
+Este script atua principalmente como um **Orquestrador**, terceirizando as responsabilidades complexas de identificação estática para os módulos abaixo:
 
-`BGR→Cinza` → `GaussianBlur` → `Canny` → `MORPH_CLOSE` → `findContours` → `ApproxPolyDP` → **conta vértices e vales (defeitos)**
-
-Resultado:
-- **3 vértices** → Triângulo
-- **6 vértices** → Hexágono
-- **≥ 8 vértices e 4 a 5 Vales Profundos** → Estrela (Analisa os "Convexity Defects" do OpenCV para checar reentrâncias. Elimina completamente contornos quadrados que sofrem blur).
-
-### `interagir_hub_principal(frame, texto, x, y)`
-Desenha informações no HUD da janela — usa Pillow no lugar do texto nativo do OpenCV para suportar acentuação em português.
-
-### `RastreadorGabarito` — State Machine de Estabilização
-Evita que o drone "confirme" um gabarito que apareceu por meio segundo por sorte. Funciona como um cronômetro exigente:
-
-- Assim que detecta **ArUco + Forma válida juntos**, começa a contar.
-- Se perder a visão por qualquer motivo (trepidação, sombra, drone inclinado), **zera o cronômetro na hora**.
-- Só aplica o **Lock-On** se a mesma combinação ID/Forma se mantiver ininterrupta por **5,0 segundos**.
-
-> Talvez no futuro aumentar a tolerância da taxa de movimentação para que o drone não perca o gabarito tão facilmente. --Alan
+- **`classificar_geometria_gabarito`**: Função purista de reconhecimento visual de formas matemáticas importada de `visao_utils/geometria.py`. (Veja [Visão Utils Doc](visaoUtilsDoc.md) para detalhes da arquitetura algorítmica).
+- **`EstabilizadorTemporal`**: Cronômetro autônomo baseado no System Clock acionado via injeção importado de `visao_utils/estabilizador.py`. O bloqueio "Trava-lock" no arquivo foi setado para durar de acordo com a meta da constante `TEMPO_CONFIRMACAO_GEOMETRIA` que reside no painel controlador `config.py`.
 
 ### `observar_frame_single_step(frame, rastreador)`
 A função que "mastiga" um frame por vez e orquestra tudo:
