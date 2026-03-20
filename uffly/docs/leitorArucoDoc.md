@@ -54,7 +54,7 @@ Termos técnicos que aparecem ao longo do código e desta documentação:
 
 - **`findContours(RETR_EXTERNAL, CHAIN_APPROX_SIMPLE)`** — Transforma as bordas em contornos fechados, pegando só os externos e comprimindo os pontos redundantes.
 
-- **`approxPolyDP(epsilon=2%)`** — Suaviza o contorno trêmulo do papel para um polígono limpo. O `epsilon` de 2% do perímetro é a tolerância: quanto maior, mais "arredondado" o polígono vira.
+- **`approxPolyDP(epsilon=1.5%)`** — Suaviza o contorno trêmulo do papel para um polígono limpo. O `epsilon` de 1.5% do perímetro retém detalhes finos das formas (como as pontas da estrela).
 
 ---
 
@@ -68,12 +68,12 @@ Termos técnicos que aparecem ao longo do código e desta documentação:
 ### `classificar_geometria_gabarito(roi_bgr)`
 Recebe a ROI e passa por um pipeline de etapas até saber qual forma geométrica está desenhada:
 
-`BGR→Cinza` → `GaussianBlur` → `Canny` → `MORPH_CLOSE` → `findContours` → `ApproxPolyDP` → **conta vértices**
+`BGR→Cinza` → `GaussianBlur` → `Canny` → `MORPH_CLOSE` → `findContours` → `ApproxPolyDP` → **conta vértices e vales (defeitos)**
 
 Resultado:
 - **3 vértices** → Triângulo
 - **6 vértices** → Hexágono
-- **≥ 8 vértices côncavos** → Estrela (contorno que "dobra para dentro")
+- **≥ 8 vértices e 4 a 5 Vales Profundos** → Estrela (Analisa os "Convexity Defects" do OpenCV para checar reentrâncias. Elimina completamente contornos quadrados que sofrem blur).
 
 ### `interagir_hub_principal(frame, texto, x, y)`
 Desenha informações no HUD da janela — usa Pillow no lugar do texto nativo do OpenCV para suportar acentuação em português.

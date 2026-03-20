@@ -184,8 +184,8 @@ def classificar_geometria_gabarito(roi_bgr):
 
     # ApproxPolyDP (Douglas-Peucker): simplifica o contorno trêmulo do papel impresso
     # em um polígono de vértices nítidos. epsilon = tolerância de desvio em pixels
-    # (2% do perímetro = equilibrio entre suavização e fidelidade à forma real).
-    epsilon = 0.02 * perimetro
+    # (1.5% do perímetro = retém mais detalhes finos, crucial para não cortar as pontas da Estrela)
+    epsilon = 0.015 * perimetro
     approx = cv2.approxPolyDP(maior_contorno, epsilon, True)
     vertices = len(approx)
     
@@ -195,11 +195,35 @@ def classificar_geometria_gabarito(roi_bgr):
     elif vertices == 6:
         return "Hexágono", maior_contorno
     else:
-        # A forma de "Estrela" comumente possui mais de 5 pontos no "approxPolyDP"
-        # Além disso, estrelas garantidamente possuem cascos "não-convexos"
+        # A forma de "Estrela" garantidamente possui um casco "não-convexo" e múltiplos vértices
         e_convexa = cv2.isContourConvex(approx)
-        if vertices >= 8 and not e_convexa:
-            return "Estrela", maior_contorno
+        if not e_convexa and 8 <= vertices <= 14:
+            # 1. Obter índices do casco convexo para calcular defeitos
+            hull_indices = cv2.convexHull(approx, returnPoints=False)
+            
+            # 2. Calcular os defeitos de convexidade (os "vales")
+            try:
+                defects = cv2.convexityDefects(approx, hull_indices)
+            except:
+                defects = None
+                
+            if defects is not None:
+                # 3. Filtrar apenas vales profundos (ignorar ondulações do papel)
+                _, _, w, h = cv2.boundingRect(approx)
+                # OpenCV retorna distância multiplicada por 256. 
+                # Requer vales cuja profundidade seja > 15% do menor lado da forma.
+                limiar_profundidade = (min(w, h) * 0.15) * 256.0 
+                
+                vales_profundos = 0
+                for i in range(defects.shape[0]):
+                    s, e, f, d = defects[i, 0]
+                    if d > limiar_profundidade:
+                        vales_profundos += 1
+                
+                # Uma estrela de 5 pontas perfeita tem 5 vales profundos. 
+                # Aceita 4 ou 5 vales para corrigir ruído da câmera/papel amassado
+                if vales_profundos >= 4:
+                    return "Estrela", maior_contorno
             
     return "Nenhuma", maior_contorno
 

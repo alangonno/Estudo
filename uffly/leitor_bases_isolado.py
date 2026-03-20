@@ -87,6 +87,15 @@ class EstabilizadorLeitura:
         Chamada a cada frame com a leitura bruta.
         Retorna True se a leitura foi confirmada (estável).
         """
+        # Proteção: se o frame não detectou NADA de útil, zera o cronômetro na hora!
+        # Não queremos "confirmar" que não há nenhuma base.
+        if forma == "Nenhuma" or digito is None:
+            self.forma_atual = None
+            self.digito_atual = None
+            self.frames_acumulados = 0
+            self.confirmado = False
+            return False
+
         # Se a leitura é idêntica ao frame anterior, acumula
         if forma == self.forma_atual and digito == self.digito_atual:
             self.frames_acumulados += 1
@@ -349,14 +358,16 @@ def observar_frame_bases(frame, templates, estabilizador):
                           max(0, x-5):min(frame.shape[1], x+w+5)]
         forma, cnt_visual = classificar_geometria_gabarito(roi_forma)
 
-        # 5. Extrai miolo e aplica Template Matching
-        roi_interna = extrair_roi_interna(frame, contorno)
+        # 5. Extrai miolo e aplica Template Matching SÓ se achou uma forma válida
         digito = None
-        if roi_interna is not None and roi_interna.size > 0:
-            digito = extrair_digito_base(roi_interna, templates)
+        if forma != "Nenhuma":
+            roi_interna = extrair_roi_interna(frame, contorno)
+            if roi_interna is not None and roi_interna.size > 0:
+                digito = extrair_digito_base(roi_interna, templates)
 
         # Guarda o candidato mais completo (forma + dígito) para o estabilizador
-        if forma != "Nenhuma" and digito is not None:
+        # Como iteramos os candidatos do MAIOR pro MENOR, travamos apenas no PRIMEIRO que estiver válido!
+        if melhor_forma_frame == "Nenhuma" and forma != "Nenhuma" and digito is not None:
             melhor_forma_frame = forma
             melhor_digito_frame = digito
 
@@ -406,9 +417,12 @@ def observar_frame_bases(frame, templates, estabilizador):
     if forma_conf:
         status_txt = f"CONFIRMADO: {forma_conf} | {digito_conf}"
         cor_status = (0, 255, 0)
-    else:
+    elif progresso > 0:
         status_txt = f"Estabilizando... {int(progresso * 100)}%"
         cor_status = (0, 200, 255)
+    else:
+        status_txt = "Buscando bases..."
+        cor_status = (200, 200, 200)
 
     frame_saida = escrever_texto_pillow(
         frame_saida, status_txt,

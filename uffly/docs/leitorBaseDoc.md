@@ -75,13 +75,16 @@ Script responsável pelo **Passo B/C** da Missão 1. Ele varre a câmera em temp
 - **Chama:** `cv2.cvtColor`, `identificar_digito_por_template`
 - **O que faz:** Converte ROI para cinza e delega para o template matching. Retorna `'3'`, `'4'`, `'5'` ou `None`.
 
-### Orquestração
+### Orquestração e Estabilidade
 
-#### `observar_frame_bases(frame, templates)`
-- **O que faz:** Pipeline completo: Segmenta → Contornos → Filtra → Classifica forma → Template Matching → HUD visual.
+#### `EstabilizadorLeitura(frames_necessarios)`
+- **O que faz:** Impede oscilações de detecção. Confirma a leitura do dígito e forma apenas após 15 frames consecutivos idênticos. **Trava de Segurança:** Se o classificador retornar que não viu "Nenhuma" base no frame, a contagem e a memória do estabilizador são zeradas imediatamente, garantindo que o drone entenda que perdeu o alvo.
+
+#### `observar_frame_bases(frame, templates, estabilizador)`
+- **O que faz:** Pipeline completo: Segmenta → Contornos → Filtra → Classifica forma → Template Matching → HUD visual. **Trava de Alvo:** O pipeline varre do maior para o menor contorno e envia apenas o **MAIOR alvo válido** da cena para o `EstabilizadorLeitura`, ignorando bases menores ao fundo para não reiniciar a contagem.
 
 #### `iniciar_teste()`
-- **O que faz:** Gera templates na inicialização, liga câmera, roda loop e escuta `Q`.
+- **O que faz:** Gera templates na inicialização, instancia o `EstabilizadorLeitura`, liga câmera, roda loop e escuta `Q`.
 
 ---
 

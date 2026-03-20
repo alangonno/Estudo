@@ -42,7 +42,13 @@ cap.set(cv2.CAP_PROP_BRIGHTNESS, 60)  # 0-100, aumentar se escuro
 
 - **Template Matching é sensível a rotação extrema**: Se a base estiver rotacionada mais de ~30°, o template retangular perde correlação. No voo real o drone olha de cima para baixo, então esse risco é baixo.
 - Formas desenhadas à mão (não impressas) podem ter vértices irregulares que confundam o `approxPolyDP`.
-- Estrelas com pontas muito finas podem ter solidity baixo e serem filtradas pelo limiar atual (`SOLIDITY_MIN = 0.70`).
+- Estrelas com pontas muito finas podem ter solidity baixo e serem filtradas pelo limiar atual (`SOLIDITY_MIN = 0.70` ou `0.40`).
+- **Erro na leitura correta de numeros:** Testado pela tela de celular porem nao obteve resultado satisfatorio. Muitas vezes trocando o numero 5 por 3 , mesmo usando a fonte corretamente, tentar usar em um fundo neutro com uma folha de papel simulando altura do drone para ver se funcionaria melhor. 
+
+### Ideia Futura: Máscara Inversa (Fundo Preto) com Templates Exatos
+
+Testar um algoritmo invertendo as imagens do leitor (`THRESH_BINARY_INV` + Otsu) de modo que o fundo da folha virasse 0 (Preto) e apenas o número fosse 255 (Branco). O objetivo sera forçar na matemática ($255 \times 255$) uma nota altíssima apenas para números de traços idênticos, anulando a penalidade ou bônus causado pelo fundo branco do papel.
+- **Solução Futura:** Se extrairmos arquivos `.png` exatos direto do arquivo SVG da competição e usarmos como os nossos templates base (eliminando o Pillow), poderemos reativar a lógica do Fundo Negro. Testado com folhas brancas em um fundo neutro, isso trará talvez uma taxa melhor de acerto ao OCR numérico.
 
 ---
 
